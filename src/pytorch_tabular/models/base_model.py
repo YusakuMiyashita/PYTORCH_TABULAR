@@ -533,7 +533,7 @@ class BaseModel(pl.LightningModule, metaclass=ABCMeta):
         for i in range(arr.shape[-1]):
             fig.add_trace(
                 go.Histogram(
-                    x=arr[:, i],
+                    x=arr[i].to('cpu').detach().numpy().copy(),
                     histnorm="probability",
                     name=f"{name}_{i}",
                     xbins=bin_dict,  # dict(start=0.0, end=1.0, size=0.1),  # bins used for histogram
